@@ -20,9 +20,8 @@ LINE = (
 
 
 def main() -> None:
-    output_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
+    output_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "out")
     os.makedirs(output_dir, exist_ok=True)
-    os.chmod(output_dir, 0o755)
     # The gate: UTF-8 text, 1-200 characters, a single line, one sentence.
     # The line was counted at exactly 108 characters; pin that
     # so any accidental wording change fails loudly instead of silently
@@ -36,7 +35,6 @@ def main() -> None:
     path = os.path.join(output_dir, "entry.txt")
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write(LINE)
-    os.chmod(path, 0o644)
     # Read it back: the file on disk must be exactly the line --
     # same text, same length, still one line, no trailing newline.
     with open(path, "rb") as f:
